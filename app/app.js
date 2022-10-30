@@ -1,6 +1,5 @@
-function startGame() {
-    // starting a new game
-    var messagesElement = document.getElementById('messages');
-    messagesElement.innerText = 'Welcome to MultiMath! Starting new game...';
-}
-document.getElementById('startGame').addEventListener('click', startGame);
+"use strict";
+// import * as fs from 'fs';
+// fs.readFileSync('data.csv','utf8');
+var textelement = document.getElementById('myparagraph');
+textelement.innerHTML = 'click';
