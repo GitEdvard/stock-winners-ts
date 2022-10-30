@@ -1,1 +1,2 @@
-document.getElementById('myparagraph')!.textContent('click');
+let textelement = document.getElementById('myparagraph')!;
+textelement.innerHTML = 'click'
