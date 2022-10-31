@@ -1,7 +1,7 @@
-// import { hello } from '../index';
+import { Repository, instance } from '../app/repository';
 
 describe('testing index file', () => {
-  test('hello should return Hello world! ', () => {
-    expect(0).toBe(0);
+  test('length of data', () => {
+    expect(instance.GetData().length).toBe(22);
   });
 });
