@@ -1,3 +1,5 @@
+import { StockValue } from './domain';
+
 export class Repository {
     private data: Array<string> = [
         'Date;Kod;Kurs',
@@ -26,6 +28,24 @@ export class Repository {
     GetData(): Array<string> {
         return this.data;
     }
+
+    GetStockExchangeFromContets(): Array<string> {
+        let contents = this.data.slice(1);
+        return contents;
+    }
 }
 
+class ValidatedRow {
+    name: string;
+    value: Number;
+    timestamp: Date;
+
+    constructor(row: string){
+        let row_split = row.split(';');
+        if (row_split.length != 3){
+            throw new Error('Something is wrong with this row: ' + row)
+        }
+        let timestamp_raw = row_split[0];
+    }
+}
 export const instance = new Repository();

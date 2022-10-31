@@ -2,7 +2,7 @@ export class StockExchange {
 
 }
 
-class StockValue {
+export class StockValue {
     name: string;
     value: number;
     timestamp: Date;

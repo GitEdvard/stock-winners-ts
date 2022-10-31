@@ -1,6 +1,6 @@
 "use strict";
 exports.__esModule = true;
-exports.StockExchange = void 0;
+exports.StockValue = exports.StockExchange = void 0;
 var StockExchange = /** @class */ (function () {
     function StockExchange() {
     }
@@ -12,3 +12,4 @@ var StockValue = /** @class */ (function () {
     }
     return StockValue;
 }());
+exports.StockValue = StockValue;
