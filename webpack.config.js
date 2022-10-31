@@ -17,7 +17,4 @@ module.exports = {
   output: {
     filename: 'bundle.js'
   },
-  devServer: {
-    inline: false
-  }
 };
