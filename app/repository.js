@@ -1,6 +1,7 @@
 "use strict";
 exports.__esModule = true;
-exports.instance = exports.Repository = void 0;
+exports.instance = exports.ValidatedRow = exports.Repository = void 0;
+var domain_1 = require("./domain");
 var Repository = /** @class */ (function () {
     function Repository() {
         this.data = [
@@ -33,7 +34,14 @@ var Repository = /** @class */ (function () {
     };
     Repository.prototype.GetStockExchangeFromContets = function () {
         var contents = this.data.slice(1);
-        return contents;
+        var stockValues = [];
+        for (var _i = 0, contents_1 = contents; _i < contents_1.length; _i++) {
+            var row = contents_1[_i];
+            var validatedRow = new ValidatedRow(row);
+            var stockValue = new domain_1.StockValue(validatedRow.name, validatedRow.value, validatedRow.timestamp);
+            stockValues.push(stockValue);
+        }
+        return stockValues;
     };
     return Repository;
 }());
@@ -45,7 +53,16 @@ var ValidatedRow = /** @class */ (function () {
             throw new Error('Something is wrong with this row: ' + row);
         }
         var timestamp_raw = row_split[0];
+        try {
+            this.timestamp = new Date(timestamp_raw);
+        }
+        catch (error) {
+            throw new Error('Date cannot be parsed: ' + timestamp_raw);
+        }
+        this.value = parseInt(row_split[2]);
+        this.name = row_split[1];
     }
     return ValidatedRow;
 }());
+exports.ValidatedRow = ValidatedRow;
 exports.instance = new Repository();

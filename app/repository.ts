@@ -29,23 +29,36 @@ export class Repository {
         return this.data;
     }
 
-    GetStockExchangeFromContets(): Array<string> {
+    GetStockExchangeFromContets(): Array<StockValue> {
         let contents = this.data.slice(1);
-        return contents;
+        let stockValues:StockValue[] = [];
+        for (const row of contents){
+            let validatedRow = new ValidatedRow(row);
+            let stockValue = new StockValue(validatedRow.name, validatedRow.value, validatedRow.timestamp);
+            stockValues.push(stockValue);
+        }
+        return stockValues;
     }
 }
 
-class ValidatedRow {
+export class ValidatedRow {
     name: string;
-    value: Number;
+    value: number;
     timestamp: Date;
 
     constructor(row: string){
         let row_split = row.split(';');
         if (row_split.length != 3){
-            throw new Error('Something is wrong with this row: ' + row)
+            throw new Error('Something is wrong with this row: ' + row);
         }
         let timestamp_raw = row_split[0];
+        try {
+            this.timestamp = new Date(timestamp_raw);
+        }catch (error) {
+            throw new Error('Date cannot be parsed: ' + timestamp_raw);
+        }
+        this.value = parseInt(row_split[2]);
+        this.name = row_split[1];
     }
 }
 export const instance = new Repository();
